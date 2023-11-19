@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #d6cccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #calculator {
+      background-color: #f09999;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    #display {
+      height: 60px;
+      font-size: 24px;
+      text-align: right;
+      padding: 0 10px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    #buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    button {
+      font-size: 18px;
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.3s;
+    }
+
+    button.operator {
+      background-color: #6f36f4;
+      color: #dbcaca;
+    }
+
+    button.double {
+      grid-column: span 2;
+    }
+
+    button:hover {
+      background-color: #c8f8c2;
+    }
+  </style>
+</head>
+<body>
+
+<div id="calculator">
+  <div id="display"></div>
+  <div id="buttons">
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button class="operator">/</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button class="operator">*</button>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button class="operator">-</button>
+    <button class="double">0</button>
+    <button>.</button>
+    <button class="operator">+</button>
+    <button class="double operator" onclick="calculate()">=</button>
+  </div>
+</div>
+
+<script>
+  let display = document.getElementById('display');
+  let buttons = document.querySelectorAll('button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (button.innerText === '=') {
+        calculate();
+      } else {
+        display.innerText += button.innerText;
+      }
+    });
+  });
+
+  function calculate() {
+    try {
+      display.innerText = eval(display.innerText);
+    } catch (error) {
+      display.innerText = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
